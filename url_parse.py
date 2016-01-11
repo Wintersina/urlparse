@@ -33,28 +33,100 @@
 # If you provide multiple ways to solve the
 # problem that isn't a bad thing.
 # -----------------------------------------------
+
+
+#   global variable used for parsing test
+#   original test
 the_url = "http://www.vandyhacks.org/dostuff/now"
 
+
+#   testing with other urls
+urltest1 = "https://github.com/Wintersina/urlparse"
+urltest2 = "https://www.eventbrite.com/d/tn--franklin/events/?cr=80034795249&gclid=CjwKEAiAws20BRCs-P-ssLbSlg4SJABbVcDp-Bop8X0-FR5ErTluXMzD9QfB06JzwCoCn01WaIWxFBoCM6Pw_wcB&kw=eventbrite+ex&mkwid=s%5Buniq_id%5D_dc&pcrid=80034795249&pkw=eventbrite&plc=&pmt=e&ref=sem0brd0ggl0usa0ppca0brand0mobile"
+#   test with no path
+urltest3 = "https://www.yourprimer.com"
+#   test with no scheme
+urltest4 = "www.google.com/mail"
+
+
+#   Sina Serati
+#   1/13/2016
+#   Using Python 2.7.1
+#   Writing a parse function to split(not using split)
+#       the http:// into scheme www.domain.com into host
+#       and the rest into path
+#   leaving all original comments.
+#   adding some more test code above
+
 def parse_url(url):
-    #  make sure your solution is valid
-    #  for NOT JUST the test URL. I will
-    #  be testing with others.
-    
+
     # your code goes here.
 
-    # do not solve using split()
+    #----- Test Code --- #
+    #sch = "http"
+    #hos = "www.vandyhacks.org"
+    #pth = "dostuff/now"
+    # ---------------------
 
-    # unitl you add code execution will fail with
-    #  an 'IndentationError' until you start to fill
-    #  in this function.
+    #defining end position
+    end = len(url)
+    #local variables
+    i = 0
+    sch =""         #scheme variable
+    hos =""         #host variable
+    pth =""         #path variable
+    ch =''          #used for traversing
+    flag = False    #used for incase there is no scheme
 
+    #getting scheme
+    while ch != ':' and i != end-1:
+        ch=url[i+1]
+        sch+=url[i]
+        i= i+1
 
+    #check to make sure there was no scheme
+    if "http" not in sch:
+        sch=""
+        flag = True
+        print "There is no scheme for this url."
 
+    #getting host
+    if flag:
+         i = len(sch)
+    else:
+        i = len(sch)+3
+    ch =''
 
+    while ch != '/' and i < end:
+        ch=url[i]
+        hos+=url[i]
+        i= i+1
 
+    #removing the first diractory path '/'
+    hosend = len(hos)-1
+    if hos[hosend] == '/':
+        hos= hos[:hosend]
 
+    #getting the rest of the URL
+    if flag:
+        i = len(sch)+len(hos)
+    else:
+         i = len(sch)+3+len(hos)
+    ch =''
+    while i < end:
+        ch=url[i]
+        pth+=url[i]
+        i= i+1
 
+    #removing the first diractory path '/'
+    pth = pth[:0]+pth[1:]
+    if len(pth) == 0:
+        print "There is no Path for this URL."
 
+    # dictionary is created being returned
+    data = {'scheme': sch,'host': hos,'path' : pth}
+
+    return data
 
 
 # -----------------------------------------------
@@ -92,6 +164,6 @@ def test_parse_url(url_dict):
 
     print "WELL DONE YOU PASSED -- !!"
 
-
+# main code
 parsed_url = parse_url(the_url)
 test_parse_url(parsed_url)
