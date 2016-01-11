@@ -42,12 +42,12 @@ the_url = "http://www.vandyhacks.org/dostuff/now"
 
 #   testing with other urls
 urltest1 = "https://github.com/Wintersina/urlparse"
-urltest2 = "https://www.eventbrite.com/d/tn--franklin/events/?cr=80034795249&gclid=CjwKEAiAws20BRCs-P-ssLbSlg4SJABbVcDp-Bop8X0-FR5ErTluXMzD9QfB06JzwCoCn01WaIWxFBoCM6Pw_wcB&kw=eventbrite+ex&mkwid=s%5Buniq_id%5D_dc&pcrid=80034795249&pkw=eventbrite&plc=&pmt=e&ref=sem0brd0ggl0usa0ppca0brand0mobile"
+urltest2 = "file://www.eventbrite.com/d/tn--franklin/events/?cr=80034795249&gclid=CjwKEAiAws20BRCs-P-ssLbSlg4SJABbVcDp-Bop8X0-FR5ErTluXMzD9QfB06JzwCoCn01WaIWxFBoCM6Pw_wcB&kw=eventbrite+ex&mkwid=s%5Buniq_id%5D_dc&pcrid=80034795249&pkw=eventbrite&plc=&pmt=e&ref=sem0brd0ggl0usa0ppca0brand0mobile"
 #   test with no path
 urltest3 = "https://www.yourprimer.com"
 #   test with no scheme
 urltest4 = "www.google.com/mail"
-
+urltest5 = "www.stackoverflow.net"
 
 #   Sina Serati
 #   1/13/2016
@@ -85,10 +85,10 @@ def parse_url(url):
         i= i+1
 
     #check to make sure there was no scheme
-    if "http" not in sch:
+    if "www" in sch:
         sch=""
         flag = True
-        print "There is no scheme for this url."
+        print "There is no scheme for this URL."
 
     #getting host
     if flag:
@@ -126,6 +126,7 @@ def parse_url(url):
     # dictionary is created being returned
     data = {'scheme': sch,'host': hos,'path' : pth}
 
+    print data
     return data
 
 
@@ -165,5 +166,5 @@ def test_parse_url(url_dict):
     print "WELL DONE YOU PASSED -- !!"
 
 # main code
-parsed_url = parse_url(the_url)
-test_parse_url(parsed_url)
+parsed_url = parse_url(urltest5)
+#test_parse_url(parsed_url)
