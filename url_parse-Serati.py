@@ -48,6 +48,7 @@ urltest3 = "https://www.yourprimer.com"
 #   test with no scheme
 urltest4 = "www.google.com/mail"
 urltest5 = "www.stackoverflow.net"
+urltest6 = "bogusdogusScheme://www.yourwebpage.com/path"
 
 #   Sina Serati
 #   1/13/2016
@@ -126,7 +127,6 @@ def parse_url(url):
     # dictionary is created being returned
     data = {'scheme': sch,'host': hos,'path' : pth}
 
-    print data
     return data
 
 
@@ -166,5 +166,5 @@ def test_parse_url(url_dict):
     print "WELL DONE YOU PASSED -- !!"
 
 # main code
-parsed_url = parse_url(urltest5)
-#test_parse_url(parsed_url)
+parsed_url = parse_url(the_url)
+test_parse_url(parsed_url)
