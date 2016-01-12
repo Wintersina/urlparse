@@ -60,19 +60,57 @@ urltest6 = "bogusdogusScheme://www.yourwebpage.com/path"
 #   adding some more test code above
 #   This second attempt will have helper methods, better, readable code.
 
+# this helper fuction just determines if there is a scheme entered or not
 def s_schemeCheck(url):
+    if "://" in url:
+        return True
+    else:
+        return False
+#this helper fucntion parses the scheme and returns the resutls to a variable
+def s_parseScheme(url, check):
+    if check:
+        pos = url.index("://")  #getting pos
+        scheme = url[0:pos]
+        return scheme
+    else:
+        return "There is no Scheme"
+#this function just parses out the URL
+def s_parseHost(url):
+    if "://" in url:
+        pos = url.index(":")
+        host = url[pos+3:]
+        if "/" in host:
+            pos = host.index("/")
+            host = host[:pos]
+        return host
+    else:
+        if "/" in url:
+            pos = url.index("/")
+        else:
+            pos = len(url)
+        host = url[0:pos]
+        return host
+#this function just parses out the path
+def s_parsePath(url):
+    if url.count("/")>=3:
+        pos = url.index(".")
+        path = url[pos:]
+        pos = path.index("/")
+        path = path[pos+1:]
+    else:
+        path = ''
+
+    return path
 
 def parse_url(url):
 
-    #bool = s_schemeCheck():   will check if a scheme is exsistant returns true or false
-    #s_parseScheme():   will parse only the scheme and return the remaining url
-    #s_parseHost():     will parse only the host
-    #s_parsePath():     will parse only the path
-
+    checker = s_schemeCheck(url)        #will check if a scheme is exsistant returns true or false
+    sch = s_parseScheme(url, checker)   #will parse only the scheme and return the remaining url
+    hos = s_parseHost(url)              #will parse only the host
+    pth = s_parsePath(url)              #will parse only the path
 
     # dictionary is created being returned
     data = {'scheme': sch,'host': hos,'path' : pth}
-
     return data
 
 
