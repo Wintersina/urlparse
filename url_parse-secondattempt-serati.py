@@ -60,12 +60,14 @@ urltest6 = "bogusdogusScheme://www.yourwebpage.com/path"
 #   adding some more test code above
 #   This second attempt will have helper methods, better, readable code.
 
+def s_schemeCheck(url):
+
 def parse_url(url):
 
     #bool = s_schemeCheck():   will check if a scheme is exsistant returns true or false
-    #s_parseScheme():   will parsh only the scheme and return the remaining url
-    #s_parseHost():     will parsh only the host
-    #s_parsePath():     will parsh only the path
+    #s_parseScheme():   will parse only the scheme and return the remaining url
+    #s_parseHost():     will parse only the host
+    #s_parsePath():     will parse only the path
 
 
     # dictionary is created being returned
