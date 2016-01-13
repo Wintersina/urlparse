@@ -42,9 +42,9 @@ the_url = "http://www.vandyhacks.org/dostuff/now"
 
 #   testing with other urls
 urltest1 = "https://github.com/Wintersina/urlparse"
-urltest2 = "file://www.eventbrite.com/d/tn--franklin/events/?cr=80034795249&gclid=CjwKEAiAws20BRCs-P-ssLbSlg4SJABbVcDp-Bop8X0-FR5ErTluXMzD9QfB06JzwCoCn01WaIWxFBoCM6Pw_wcB&kw=eventbrite+ex&mkwid=s%5Buniq_id%5D_dc&pcrid=80034795249&pkw=eventbrite&plc=&pmt=e&ref=sem0brd0ggl0usa0ppca0brand0mobile"
+urltest2 = "file://wmpt.eventbrite.com/d/tn--franklin/events/?cr=80034795249&gclid=CjwKEAiAws20BRCs-P-ssLbSlg4SJABbVcDp-Bop8X0-FR5ErTluXMzD9QfB06JzwCoCn01WaIWxFBoCM6Pw_wcB&kw=eventbrite+ex&mkwid=s%5Buniq_id%5D_dc&pcrid=80034795249&pkw=eventbrite&plc=&pmt=e&ref=sem0brd0ggl0usa0ppca0brand0mobile"
 #   test with no path
-urltest3 = "https://www.yourprimer.com"
+urltest3 = "https://www.yourprimer.io"
 #   test with no scheme
 urltest4 = "www.google.com/mail"
 urltest5 = "www.stackoverflow.net"
@@ -98,8 +98,21 @@ def s_parsePath(url):
         pos = path.index("/")
         path = path[pos+1:]
     else:
-        path = ''
-
+        if "://" in url:
+            pos = url.index(".")
+            path = url[pos:]
+            if "/" in path:
+                pos = path.index("/")
+                path = path[pos:0]
+            else:
+                path = ''
+        else:
+            if "/" in url:
+                pos = url.index("/")
+                path = url[pos+1:]
+            else:
+                path = ''
+    
     return path
 
 def parse_url(url):
